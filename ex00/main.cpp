@@ -1,55 +1,37 @@
 #include "BitcoinExchange.hpp"
-
-bool isInt(std::string n)
+bool isNumeric(std::string n)
 {
-	try
+	int l = 0;
+	int p = 0;
+	for (size_t i = 0; i < n.size(); i++)
 	{
-		std::stoll(n);
-		return true;
+		if (n[i] == '-' || n[i] == '+')
+			l ++;
+		if (n[i] == '.')
+			p ++;
+		if ((n[i] < 48 || n[i] > 57) && n[i] != '-' && n[i] != '+' && n[i] != '.' )
+			return false;
+		if (i > 0 && (n[i] == '-' || n[i] == '+'))
+			return false;
+		if ((i == 0 || i == n.size() - 1) && n[i] == '.')
+			return false;
 	}
-	catch(const std::invalid_argument&)
-	{
+	long long int m = std::stoll(n);
+	if (m > 1000)
 		return false;
-	}
-}
-
-bool isFloat(std::string n)
-{
-	try
-	{
-		std::stof(n);
-		return true;
-	}
-	catch(const std::invalid_argument&)
-	{
-		return false;
-	}
+	return true;
 }
 
 bool ValidNum(std::string l)
 {
 	std::string sn = l.substr(13, l.size() - 13);
-	std::cout << sn << std::endl;
-	if (isInt(sn))
+	if (!(isNumeric(sn)))
 	{
-		if (std::stoll(sn) > 1000)
-		{
-			std::cout << "the number is so large." << std::endl;
-			return false;
-		}
-		return true;
-	}
-	else if(isFloat(sn))
-	{
-		if (std::stof(sn) > 1000)
-		{
-			std::cout << "the number is so large." << std::endl;
-			return false;
-		}
-		return true;
+		std::cout << "non numeric arg." << std::endl;
+		return false;
 	}
 	else
-		return false;
+		return true;
 }
 
 bool RealDate(std::string date)
@@ -100,8 +82,8 @@ bool ComproveIt(std::string l)
 	}
 	if (l.substr(10, 3).compare(" | ") == std::string::npos)
 		return false;
-	if (ValidNum(l))
-		return true;
+	if (!(ValidNum(l)))
+		return false;
 	return true;
 }
 
