@@ -15,6 +15,7 @@ class BitcoinExchange
         BitcoinExchange(BitcoinExchange const & c);
         BitcoinExchange & operator =(BitcoinExchange const &c);
         ~BitcoinExchange();
+        void searchExe(std::string l);
 };
 
 #endif
