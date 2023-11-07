@@ -27,7 +27,7 @@ bool ValidNum(std::string l)
 	std::string sn = l.substr(13, l.size() - 13);
 	if (!(isNumeric(sn)))
 	{
-		std::cout << "non numeric arg." << std::endl;
+		std::cout << "non numeric arg or out of range." << std::endl;
 		return false;
 	}
 	else
