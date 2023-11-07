@@ -27,7 +27,7 @@ BitcoinExchange & BitcoinExchange::operator =(BitcoinExchange const &c)
 BitcoinExchange::~BitcoinExchange()
 {
 }
-void searchExe(std::string l)
+void BitcoinExchange::searchExe(std::string l)
 {
     
 }

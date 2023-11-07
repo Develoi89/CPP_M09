@@ -7,8 +7,8 @@ bool isNumeric(std::string n)
 	{
 		// if (n[i] == '-' || n[i] == '+')
 		// 	l ++;
-		// if (n[i] == '.')
-		// 	p ++;
+		if (n[i] == '.')
+			p ++;
 		if ((n[i] < 48 || n[i] > 57) && n[i] != '-' && n[i] != '+' && n[i] != '.' )
 		{
 			std::cout << "Error bad input => " << n << std::endl;
