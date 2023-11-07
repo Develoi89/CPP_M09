@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <ctime>
+#include <stdexcept>
 
 class BitcoinExchange
 {

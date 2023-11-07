@@ -1,5 +1,56 @@
 #include "BitcoinExchange.hpp"
-#include <ctime>
+
+bool isInt(std::string n)
+{
+	try
+	{
+		std::stoll(n);
+		return true;
+	}
+	catch(const std::invalid_argument&)
+	{
+		return false;
+	}
+}
+
+bool isFloat(std::string n)
+{
+	try
+	{
+		std::stof(n);
+		return true;
+	}
+	catch(const std::invalid_argument&)
+	{
+		return false;
+	}
+}
+
+bool ValidNum(std::string l)
+{
+	std::string sn = l.substr(13, l.size() - 13);
+	std::cout << sn << std::endl;
+	if (isInt(sn))
+	{
+		if (std::stoll(sn) > 1000)
+		{
+			std::cout << "the number is so large." << std::endl;
+			return false;
+		}
+		return true;
+	}
+	else if(isFloat(sn))
+	{
+		if (std::stof(sn) > 1000)
+		{
+			std::cout << "the number is so large." << std::endl;
+			return false;
+		}
+		return true;
+	}
+	else
+		return false;
+}
 
 bool RealDate(std::string date)
 {
@@ -42,17 +93,16 @@ bool ComproveIt(std::string l)
 		std::cout << "no valid format date" << std::endl;
 		return false;
 	}
-	if (RealDate(date))
-		return true;
-	else
+	if (!(RealDate(date)))
 	{
 		std::cout << "no valid date" << std::endl;
 		return false;
 	}
-	return true;
-	if (l.substr(10, 3).compare(" | "))
+	if (l.substr(10, 3).compare(" | ") == std::string::npos)
 		return false;
-	
+	if (ValidNum(l))
+		return true;
+	return true;
 }
 
 int main(int argc, char* argv[])
