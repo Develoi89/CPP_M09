@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+
 bool isNumeric(std::string n)
 {
 	int l = 0;
@@ -54,7 +55,8 @@ bool RealDate(std::string date)
 	int m = std::stoi(date.substr(5, 2));
 	int d = std::stoi(date.substr(8, 2));
 	bool bis = false;
-
+	if(y < 2009)
+		return false;
 	if((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0))
 		bis = true;
 	if (d > 0 && d <= 31)
@@ -76,11 +78,6 @@ bool RealDate(std::string date)
 
 bool ComproveIt(std::string l)
 {
-	if (l.size() < 14)
-	{
-		std::cout << "wrong format line." << std::endl;
-		return false;
-	}
 	std::string date = l.substr(0, l.find("|") - 1);
 	if(date.size() > 10)
 		return false;
@@ -89,7 +86,7 @@ bool ComproveIt(std::string l)
 	std::memset(&timeinfo, 0, sizeof(timeinfo));
 	if (strptime(date.c_str(), format.c_str(), &timeinfo) == nullptr) 
 	{
-		std::cout << "no valid format date" << std::endl;
+		std::cout << "Error: bad input => " << date << std::endl;
 		return false;
 	}
 	if (!(RealDate(date)))
@@ -104,6 +101,11 @@ bool ComproveIt(std::string l)
 	}
 	if (!(ValidNum(l)))
 		return false;
+		if (l.size() < 14)
+	{
+		std::cout << "wrong format line." << std::endl;
+		return false;
+	}
 	return true;
 }
 
@@ -123,7 +125,7 @@ int main(int argc, char* argv[])
 		while (std::getline(input, line))
 		{
 			if (ComproveIt(line))
-				std::cout << "okk" << std::endl;
+				Data.searchExe(line);
 		}
 	}
 	return 0;
