@@ -18,4 +18,9 @@ class BitcoinExchange
         void searchExe(std::string l);
 };
 
+bool isNumeric(std::string n);
+bool ValidNum(std::string l);
+bool RealDate(std::string date);
+bool ComproveIt(std::string l);
+
 #endif
