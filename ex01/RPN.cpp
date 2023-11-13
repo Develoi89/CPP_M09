@@ -44,6 +44,7 @@ void RPN::solveIt()
         while (_pol.size() > 1)
         {
             int b = _pol.top() - '0';
+            std::cout << b << std::endl;
             _pol.pop();
             char c = _pol.top();
             _pol.pop();
