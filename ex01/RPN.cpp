@@ -15,6 +15,15 @@ RPN::RPN(std::string pl)
     _pol.resize(d);
 }
 
+RPN::RPN(RPN const &c): _pol(c._pol)
+{
+}
+RPN & RPN::operator = (RPN const & c)
+{
+    _pol = c._pol;
+    return *this;
+}
+
 int RPN::operate(char c)
 {
     int b = _tmp.top();
