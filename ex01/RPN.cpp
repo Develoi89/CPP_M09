@@ -2,23 +2,26 @@
 
 RPN::RPN(std::string pl)
 {
-    for (int i = pl.size(); i > -1 ; i--)
-        if (pl[i] != 32)
-            _pol.push(pl[i]);
+    int d = 0;
+    _pol.resize(pl.size());
+    for (size_t i = 0; i < pl.size(); i++)
+    {
+        if(pl[i] == ' ' )
+            i++;
+        _pol[d] = pl[i];
+        d++;
+        i++;
+    }
+    _pol.resize(d);
 }
 
-// void RPN::printIt()
-// {
-//     while(_pol.size() > 0)
-//     {
-//         std::cout << _pol.top();
-//         _pol.pop();
-//     }
-//     std::cout << std::endl;
-// }
-
-int operate(int a, int b, char c)
+int RPN::operate(char c)
 {
+    int b = _tmp.top();
+    _tmp.pop();
+    int a = _tmp.top();
+    _tmp.pop();
+
     if (c == '+')
         return (a + b);
     else if (c == '-')
@@ -28,35 +31,28 @@ int operate(int a, int b, char c)
     else if (c == '/')
         return (a / b);
     else
-    {
-        std::cout << "wrong polynomial" << std::endl;
-        return 0;
-    }
+        return (0);
 }
 
-void RPN::solveIt()
+int RPN::solveIt()
 {
-    try
+    for (size_t i = 0; i < _pol.size(); i++)
     {
-        int a = _pol.top() - '0';
-        std::cout << a << std::endl;
-        _pol.pop();
-        while (_pol.size() > 1)
+        if(_pol[i] >= 48 && _pol[i] <= 57)
         {
-            int b = _pol.top() - '0';
-            std::cout << b << std::endl;
-            _pol.pop();
-            char c = _pol.top();
-            _pol.pop();
-            a = operate(a, b, c);
+            _tmp.push(_pol[i] - '0');
         }
-        std::cout << "Result: " << a << std::endl;
+        else if (_pol[i] == '-' || _pol[i] == '+' || _pol[i] == '*' || _pol[i] == '/')
+        {
+            _tmp.push(operate(_pol[i]));
+        }
+        else
+        {
+            std::cout << "Error" << std::endl;
+            return (0);
+        }
     }
-    catch(const std::exception& e)
-    {
-        std::cout << "Error: wrong polynomial." << std::endl;
-    }
-
+    return (_tmp.top());
 }
 
 RPN::~RPN()

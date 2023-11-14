@@ -7,13 +7,15 @@
 class RPN
 {
 private:
-    std::stack<char> _pol;
+    std::stack<int> _tmp;
+    std::string _pol;
 public:
     RPN(std::string pl);
     RPN(RPN const &c);
     RPN & operator = (RPN const & c);
     ~RPN();
-    void solveIt();
+    int solveIt();
+    int operate(char c);
     // void printIt();
 };
 
