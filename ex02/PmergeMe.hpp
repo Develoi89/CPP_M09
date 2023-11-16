@@ -1,7 +1,10 @@
 #ifndef PMERGEME_HPP
-# define PMERGE_HPP
+# define PMERGEME_HPP
 #include <iostream>
-
+#include <vector>
+#include <list>
+#include <ctime>
+#include <limits>
 
 class PmergeMe
 {
@@ -10,7 +13,10 @@ class PmergeMe
         PmergeMe(PmergeMe const & c);
         PmergeMe & operator = (PmergeMe const & c);
         ~PmergeMe();
-        void init(std::string nmb);
+        int static init(std::vector<int> nmb);
+        int static start(std::list<int> nmb);
 };
+
+int verify(std::string s);
 
 #endif
