@@ -58,7 +58,7 @@ int RPN::solveIt()
         else
         {
             std::cout << "Error" << std::endl;
-            return (0);
+            exit (0);
         }
     }
     return (_tmp.top());
