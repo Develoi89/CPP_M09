@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     clock_t end2 = clock();
     long double elapsed_time_list = static_cast<long double>(end - start) / CLOCKS_PER_SEC;
     long double elapsed_time_list2 = static_cast<long double>(end2 - start2) / CLOCKS_PER_SEC;
-    std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: " << elapsed_time_list << " us" << std::endl;
-    std::cout << "Time to process a range of " << argc - 1 << " elements with std::list: " << elapsed_time_list2 << " us" << std::endl;
+    std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: " << std::fixed << std::setprecision(6) << elapsed_time_list << " us" << std::endl;
+    std::cout << "Time to process a range of " << argc - 1 << " elements with std::list: " << std::fixed << std::setprecision(6) << elapsed_time_list2 << " us" << std::endl;
     return 0;
 }
